@@ -32,11 +32,10 @@ except (ValueError, ModuleNotFoundError, AttributeError):
     sys.exit(1)
 
 # Inicializar el agente
-agent = AgentClass(
-    actions, 
-    game,
-    epsilon=0.0
-)
+try:
+    agent = AgentClass(actions, game, epsilon=0.0)
+except TypeError:
+    agent = AgentClass(actions, game)
 
 # Agente con acciones aleatorias
 while True:

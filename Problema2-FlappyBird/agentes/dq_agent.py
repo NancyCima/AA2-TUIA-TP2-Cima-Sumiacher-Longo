@@ -95,7 +95,7 @@ class QAgent(Agent):
         
         # Exploración adaptiva: más exploración en estados poco visitados
         visit_bonus = 1.0 / (1.0 + self.state_visits[discrete_state] * 0.1)
-        effective_epsilon = min(self.epsilon + visit_bonus * 0.1, 0.3)
+        effective_epsilon = self.epsilon + visit_bonus * 0.1
         
         # Exploración: acción aleatoria
         if np.random.random() < effective_epsilon:
