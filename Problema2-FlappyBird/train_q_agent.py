@@ -2,6 +2,7 @@ from ple.games.flappybird import FlappyBird
 from ple import PLE
 import numpy as np
 import time
+import matplotlib.pyplot as plt
 from agentes.dq_agent import QAgent
 
 # --- Configuración del Entorno y Agente ---
@@ -64,6 +65,26 @@ for episode in range(num_episodes):
 
 print("Entrenamiento completado.")
 agent.save_q_table("flappy_birds_q_table_final.pkl")
+
+# --- Visualización del entrenamiento ---
+def moving_average(x, window=100):
+    return [np.mean(x[i-window:i]) if i >= window else np.mean(x[:i+1]) for i in range(len(x))]
+
+plt.figure(figsize=(10, 5))
+plt.plot(rewards_all_episodes, label='Recompensa por episodio', alpha=0.3)
+plt.plot(moving_average(rewards_all_episodes), label='Promedio móvil (100 episodios)', color='orange')
+plt.xlabel('Episodio')
+plt.ylabel('Recompensa')
+plt.title('Aprendizaje del agente (Q-Learning en Flappy Bird)')
+plt.legend()
+plt.grid()
+plt.tight_layout()
+
+# Guardar el gráfico
+plt.savefig("qlearning_flappybird_entrenamiento.png")
+
+# Mostrar en pantalla
+plt.show()
 
 # --- Opcional: Ejecutar el agente entrenado (sin exploración) ---
 print("\n--- Ejecutando agente entrenado (modo explotación) ---")
