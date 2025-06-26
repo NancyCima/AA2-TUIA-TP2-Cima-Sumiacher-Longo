@@ -72,3 +72,29 @@ El agente Q-Learning fue capaz de aprender a jugar razonablemente bien gracias a
 * Puede volverse ineficiente con más variables o más detalle.
 * Necesita muchos episodios para visitar suficientes combinaciones de estado y acción.
 
+### Agente DQ-Learning  
+El agente DQ-Learning usa una red neuronal para aprender a partir de los valores Q directamente, en lugar de almacenarlos en una tabla. Sin embargo, en este caso, su desempeño fue inferior al del agente tabular, probablemente debido a la limitada cantidad de datos de entrenamiento (814 estados).
+
+#### Ventajas:
+
+* Generaliza: puede comportarse en estados no vistos, aunque con limitaciones dadas las pocas muestras.  
+* Ahorra memoria: no necesita guardar una tabla gigante.  
+* Fácil de usar: se guarda como un único archivo entrenado.
+
+#### Limitaciones:
+
+* Rendimiento inferior al agente Q-Learning tradicional en este entorno.  
+* Sensible a la cantidad y calidad de datos de entrenamiento.  
+* Menor fluidez en ejecución, con caída notable de FPS.  
+* No logra superar al agente tabular con la configuración y datos actuales.
+
+#### Observaciones:
+
+* Se entrenó con un MSE cercano a 0.75, lo que indica que la red aproximó la Q-table, pero con margen importante de error.  
+* El agente tiende a comportarse peor y de forma menos estable que el Q-Agent. La máxima recompensa vista obtenida fue de 30 tuberias.  
+* Más datos y un estado con mayor detalle podrían mejorar el rendimiento de la red.
+
+## Conclusión Final  
+Tanto el agente Q-Learning como el DQ-Learning lograron aprender a jugar, pero el Q-Agent tradicional mostró un rendimiento superior y mayor fluidez en tiempo real. La red neuronal, aunque prometedora por su capacidad de generalización, quedó limitada por la escasez de datos de entrenamiento y no logró mejorar la experiencia general.
+
+Una mejora clave para ambos enfoques sería utilizar un estado más detallado — más bins o más variables del entorno (por ejemplo, información del segundo tubo). Esto permitiría una mejor representación del entorno, mejor aprendizaje y decisiones más acertadas. Además, se obtendrían más datos para entrenar, lo que ayudaría especialmente a la red neuronal a obtener una generalización mayor y mejorar su rendimiento.
